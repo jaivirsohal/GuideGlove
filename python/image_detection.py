@@ -15,6 +15,7 @@ def detect_items(image_path="test_images/fishing.jpeg"):
             confidence = box.conf.item()
             print(f"Object: {object_name}, Confidence: {confidence:.2f}")
             tts.queue_object(object_name, confidence)
-
-    tts.speak_queue()
+    
+    tts.save_queue_to_wav()
+    #tts.speak_queue()
 
