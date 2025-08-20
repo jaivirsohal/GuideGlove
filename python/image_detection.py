@@ -1,9 +1,10 @@
 from ultralytics import YOLO
 import text_to_speech
 
+model = YOLO('yolov8n.pt')
+
 def detect_items(image_path="test_images/fishing.jpeg"):
 
-    model = YOLO('yolov8n.pt')
     #image_path = 'test_images/pizza.jpeg' # can either have pi store image in folder or pass it directly
 
     results = model(image_path)
