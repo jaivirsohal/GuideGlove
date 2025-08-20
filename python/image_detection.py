@@ -1,7 +1,8 @@
 from ultralytics import YOLO
-import text_to_speech
+from text_to_speech import TTSManager
 
 model = YOLO('yolov8n.pt')
+tts = TTSManager()
 
 def detect_items(image_path="test_images/fishing.jpeg"):
 
@@ -13,7 +14,7 @@ def detect_items(image_path="test_images/fishing.jpeg"):
             object_name = result.names[int(box.cls)]
             confidence = box.conf.item()
             print(f"Object: {object_name}, Confidence: {confidence:.2f}")
-            text_to_speech.queue_object(object_name, confidence)
+            tts.queue_object(object_name, confidence)
 
-    text_to_speech.speak_queue()
+    tts.speak_queue()
 
