@@ -5,7 +5,7 @@ PHONE = 0 #these indices are for running on a mac
 LAPTOP = 1
 OTHER = 2
 
-def take_photo(filepath, camera_index=LAPTOP):
+def take_photo(filepath, camera_index=PHONE):
     cap = cv2.VideoCapture(camera_index)
     
     if not cap.isOpened():
