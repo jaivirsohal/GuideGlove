@@ -1,9 +1,11 @@
 from ultralytics import YOLO
-import text_to_speech
+from text_to_speech import TTSManager
 
-def detect_items(image_path="test_images/fishing.jpeg"):
+model = YOLO('yolov8n.pt')
+tts = TTSManager()
 
-    model = YOLO('yolov8n.pt')
+def detect_items(image_path="test_images/fishing.jpeg", save=False):
+
     #image_path = 'test_images/pizza.jpeg' # can either have pi store image in folder or pass it directly
 
     results = model(image_path)
@@ -12,7 +14,10 @@ def detect_items(image_path="test_images/fishing.jpeg"):
             object_name = result.names[int(box.cls)]
             confidence = box.conf.item()
             print(f"Object: {object_name}, Confidence: {confidence:.2f}")
-            text_to_speech.queue_object(object_name, confidence)
-
-    text_to_speech.speak_queue()
+            tts.queue_object(object_name, confidence)
+    
+    if save:
+        tts.save_queue_to_wav()
+    else:
+        tts.speak_queue()
 
